@@ -2,6 +2,7 @@ package com.example.recordkeeper
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commit
 import com.example.recordkeeper.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
@@ -12,6 +13,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.textViewExample.text = "text changed"
+        supportFragmentManager.commit {
+            add(R.id.frame_content, RunningFragment())
+        }
     }
 }
