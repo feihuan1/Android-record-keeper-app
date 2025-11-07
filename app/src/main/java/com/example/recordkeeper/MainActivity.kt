@@ -1,6 +1,8 @@
 package com.example.recordkeeper
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.example.recordkeeper.databinding.ActivityMainBinding
@@ -14,9 +16,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.buttonCycling.setOnClickListener { binding.bottomNav }
 
-        binding.buttonCycling.setOnClickListener { onCyclingClicked() }
-        binding.buttonRunning.setOnClickListener { onRunningClicked() }
     }
 }
 
