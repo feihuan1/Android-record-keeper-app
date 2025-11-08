@@ -1,12 +1,15 @@
 package com.example.recordkeeper
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.example.recordkeeper.databinding.ActivityMainBinding
-class MainActivity : AppCompatActivity() {
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -16,19 +19,31 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonCycling.setOnClickListener { binding.bottomNav }
+        binding.bottomNav.setOnNavigationItemSelectedListener(this)
 
     }
-}
 
-private fun MainActivity.onRunningClicked() {
-    supportFragmentManager.commit {
-        replace(R.id.frame_content, RunningFragment())
+    override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
+        if (menuItem.itemId == R.id.nav_cycling) {
+            onCyclingClicked()
+            return true
+        } else if (menuItem.itemId == R.id.nav_running) {
+            onRunningClicked()
+            return true
+        } else {
+            return false
+        }
     }
-}
 
-private fun MainActivity.onCyclingClicked() {
-    supportFragmentManager.commit {
-        replace(R.id.frame_content, CyclingFragment())
+    private fun onRunningClicked() {
+        supportFragmentManager.commit {
+            replace(R.id.frame_content, RunningFragment())
+        }
+    }
+
+    private fun onCyclingClicked() {
+        supportFragmentManager.commit {
+            replace(R.id.frame_content, CyclingFragment())
+        }
     }
 }
