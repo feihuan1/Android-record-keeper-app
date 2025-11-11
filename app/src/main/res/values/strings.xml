@@ -8,4 +8,9 @@
     <string name="_10km">10km</string>
     <string name="half_marathon">Half Marathon</string>
     <string name="marathon">Marathon</string>
+    <string name="cycling_heading">Cycling</string>
+    <string name="a_cycling_image">A cycling Image</string>
+    <string name="longest_ride">Longest Ride</string>
+    <string name="biggest_climb">Biggest Climb</string>
+    <string name="best_average_speed">Best Average Speed</string>
 </resources>
