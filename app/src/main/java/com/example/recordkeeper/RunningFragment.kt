@@ -35,7 +35,7 @@ class RunningFragment : Fragment() {
     private fun setupClickListener() {
         binding.container5km.setOnClickListener { launchRunningRecordScreen("5km") }
         binding.container10km.setOnClickListener { launchRunningRecordScreen("10km") }
-        binding.containerHalfMarathon.setOnClickListener { launchRunningRecordScreen("Half-marathon") }
+        binding.containerHalfMarathon.setOnClickListener { launchRunningRecordScreen("Half Marathon") }
         binding.containerMarathon.setOnClickListener { launchRunningRecordScreen("Marathon") }
     }
 

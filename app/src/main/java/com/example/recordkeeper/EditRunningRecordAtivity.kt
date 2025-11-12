@@ -17,7 +17,8 @@ class EditRunningRecordAtivity : AppCompatActivity() {
 		supportActionBar?.setDisplayHomeAsUpEnabled(true)
 		supportActionBar?.setDisplayShowHomeEnabled(true)
 		supportActionBar?.setDisplayShowTitleEnabled(true)
-		supportActionBar?.title = "My New Title"
+        val distance = intent.getStringExtra("Distance")
+		supportActionBar?.title = "$distance Record"
     }
 
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
