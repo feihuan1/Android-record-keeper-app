@@ -2,19 +2,19 @@ package com.example.recordkeeper
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.appbar.MaterialToolbar
+import com.example.recordkeeper.databinding.ActivityEditRunningRecordAtivityBinding
 
 class EditRunningRecordAtivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityEditRunningRecordAtivityBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_running_record_ativity)
+        binding = ActivityEditRunningRecordAtivityBinding.inflate(layoutInflater)
+		setContentView(binding.root)
 
-		val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-		setSupportActionBar(toolbar)
+		setSupportActionBar(binding.toolbar)
 		supportActionBar?.setDisplayHomeAsUpEnabled(true)
 		supportActionBar?.setDisplayShowHomeEnabled(true)
     }
