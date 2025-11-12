@@ -13,10 +13,11 @@ class EditRunningRecordAtivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditRunningRecordAtivityBinding.inflate(layoutInflater)
 		setContentView(binding.root)
-
 		setSupportActionBar(binding.toolbar)
 		supportActionBar?.setDisplayHomeAsUpEnabled(true)
 		supportActionBar?.setDisplayShowHomeEnabled(true)
+		supportActionBar?.setDisplayShowTitleEnabled(true)
+		supportActionBar?.title = "My New Title"
     }
 
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
