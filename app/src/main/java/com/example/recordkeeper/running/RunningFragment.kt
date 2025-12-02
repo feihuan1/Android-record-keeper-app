@@ -1,4 +1,4 @@
-package com.example.recordkeeper
+package com.example.recordkeeper.running
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.recordkeeper.running.EditRunningRecordAtivity
 import com.example.recordkeeper.databinding.FragmentRunningBinding
-
 
 class RunningFragment : Fragment() {
 
@@ -45,5 +45,3 @@ class RunningFragment : Fragment() {
         startActivity(intent)
     }
 }
-
-

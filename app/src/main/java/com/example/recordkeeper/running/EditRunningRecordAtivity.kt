@@ -1,5 +1,6 @@
-package com.example.recordkeeper
+package com.example.recordkeeper.running
 
+import android.R
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +23,7 @@ class EditRunningRecordAtivity : AppCompatActivity() {
     }
 
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
-		if (item.itemId == android.R.id.home) {
+		if (item.itemId == R.id.home) {
 			onBackPressedDispatcher.onBackPressed()
 			return true
 		}
