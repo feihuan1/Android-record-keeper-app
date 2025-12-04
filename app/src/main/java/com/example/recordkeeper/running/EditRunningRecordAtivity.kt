@@ -14,7 +14,9 @@ class EditRunningRecordAtivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditRunningRecordAtivityBinding
 
 	private lateinit var runningPreferences: SharedPreferences
-	private lateinit var distance: String
+	private  val distance: String? by lazy{
+		intent.getStringExtra("Distance")
+	}
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +29,6 @@ class EditRunningRecordAtivity : AppCompatActivity() {
 		supportActionBar?.setDisplayShowTitleEnabled(true)
 
 		runningPreferences = getSharedPreferences("running", Context.MODE_PRIVATE)
-        distance = intent.getStringExtra("Distance").toString()
 
 
 		supportActionBar?.title = "$distance Record"
