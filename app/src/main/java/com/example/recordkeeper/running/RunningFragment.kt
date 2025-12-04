@@ -31,6 +31,14 @@ class RunningFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         setupClickListener()
+    }
+
+    override fun onStart() {
+        super.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
         displayRecords()
     }
 

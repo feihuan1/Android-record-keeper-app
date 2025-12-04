@@ -2,6 +2,7 @@ package com.example.recordkeeper.running
 
 import android.R
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,10 @@ class EditRunningRecordAtivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditRunningRecordAtivityBinding
 
+	private lateinit var runningPreferences: SharedPreferences
+	private lateinit var distance: String
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 		binding = ActivityEditRunningRecordAtivityBinding.inflate(layoutInflater)
@@ -20,10 +25,17 @@ class EditRunningRecordAtivity : AppCompatActivity() {
 		supportActionBar?.setDisplayHomeAsUpEnabled(true)
 		supportActionBar?.setDisplayShowHomeEnabled(true)
 		supportActionBar?.setDisplayShowTitleEnabled(true)
-        val distance = intent.getStringExtra("Distance")
-		supportActionBar?.title = "$distance Record"
 
-		binding.buttonSave.setOnClickListener { saveRecord(distance) }
+		runningPreferences = getSharedPreferences("running", Context.MODE_PRIVATE)
+        distance = intent.getStringExtra("Distance").toString()
+
+
+		supportActionBar?.title = "$distance Record"
+		displayRecord()
+		binding.buttonSave.setOnClickListener {
+			saveRecord()
+			finish()
+		}
 
 //// 	examples
 //		val applicationPreferences = PreferenceManager.getDefaultSharedPreferences(this)
@@ -45,17 +57,19 @@ class EditRunningRecordAtivity : AppCompatActivity() {
 //		}
     }
 
-	private fun saveRecord(distance: String?) {
+	private fun displayRecord() {
+		binding.editTextRecord.setText(runningPreferences.getString("$distance record", null))
+		binding.editTextDate.setText(runningPreferences.getString("$distance date", null))
+
+	}
+
+	private fun saveRecord() {
 		val record = binding.editTextRecord.text.toString()
 		val date = binding.editTextDate.text.toString()
-
-		val runningPreferences = getSharedPreferences("running", Context.MODE_PRIVATE)
-
 //		val editor = runningPreferences.edit()
 //		editor.putString("record", record)
 //		editor.putString("date", date)
 //		editor.apply()
-
 		// modern way
 		runningPreferences.edit {
 			putString("$distance record", record)
