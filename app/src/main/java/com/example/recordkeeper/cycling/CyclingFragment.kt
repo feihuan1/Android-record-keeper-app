@@ -40,21 +40,21 @@ class CyclingFragment: Fragment() {
 
         binding.textViewLongestRideValue.text = cyclingPreferences.getString("Longest Ride record", null)
         binding.textViewLongestRideDate.text = cyclingPreferences.getString("Longest Ride date", null)
-        binding.textViewBiggestClimbValue.text = cyclingPreferences.getString("Biggest Climb Record", null)
+        binding.textViewBiggestClimbValue.text = cyclingPreferences.getString("Biggest Climb record", null)
         binding.textViewBiggestClimbDate.text = cyclingPreferences.getString("Biggest Climb date", null)
-        binding.textViewBestSpeedValue.text = cyclingPreferences.getString("Best Average Speed Record", null)
+        binding.textViewBestSpeedValue.text = cyclingPreferences.getString("Best Average Speed record", null)
         binding.textViewBestSpeedDate.text = cyclingPreferences.getString("Best Average Speed date", null)
 
     }
 
     private fun setupClickListener() {
         binding.containerLongestRide.setOnClickListener { launchEditCyclingRecordScreen("Longest Ride", "Distance") }
-        binding.containerLongestRide.setOnClickListener { launchEditCyclingRecordScreen("Biggest Climb", "Height") }
-        binding.containerLongestRide.setOnClickListener { launchEditCyclingRecordScreen("Best Average Speed", "Average Speed") }
+        binding.containerBiggestClimb.setOnClickListener { launchEditCyclingRecordScreen("Biggest Climb", "Height") }
+        binding.containerBestSpeed.setOnClickListener { launchEditCyclingRecordScreen("Best Average Speed", "Average Speed") }
     }
     private fun launchEditCyclingRecordScreen(record: String, recordFieldHint:String) {
         val intent = Intent(context, EditRecordActivity::class.java)
-        intent.putExtra("screen_data", EditRecordActivity.ScreenData(record, "cycling", "Time"))
+        intent.putExtra("screen_data", EditRecordActivity.ScreenData(record, "cycling", recordFieldHint))
         startActivity(intent)
     }
 

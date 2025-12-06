@@ -19,11 +19,6 @@ class EditRecordActivity : AppCompatActivity() {
 	private val recordPreferences by lazy {
 		getSharedPreferences(screenData.sharedPreferencesName, MODE_PRIVATE)
 	}
-	private  val record by lazy{
-		intent.getStringExtra(screenData.record)
-	}
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		binding = ActivityEditRecordBinding.inflate(layoutInflater)
@@ -78,8 +73,8 @@ class EditRecordActivity : AppCompatActivity() {
 	}
 
 	private fun displayRecord() {
-		binding.editTextRecord.setText(recordPreferences.getString("$screenData.record record", null))
-		binding.editTextDate.setText(recordPreferences.getString("$screenData.record date", null))
+		binding.editTextRecord.setText(recordPreferences.getString("${screenData.record} record", null))
+		binding.editTextDate.setText(recordPreferences.getString("${screenData.record} date", null))
 
 	}
 
