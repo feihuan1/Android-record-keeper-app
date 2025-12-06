@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.recordkeeper.databinding.FragmentCyclingBinding
+import com.example.recordkeeper.editrecord.EditRecordActivity
 import com.example.recordkeeper.running.EditRunningRecordAtivity
 
 
@@ -29,13 +30,13 @@ class CyclingFragment: Fragment() {
     }
 
     private fun setupClickListener() {
-        binding.containerLongestRide.setOnClickListener { launchEditCyclingRecordScreen("Longest Ride") }
-        binding.containerLongestRide.setOnClickListener { launchEditCyclingRecordScreen("Biggest Climb") }
-        binding.containerLongestRide.setOnClickListener { launchEditCyclingRecordScreen("Best Average Speed") }
+        binding.containerLongestRide.setOnClickListener { launchEditCyclingRecordScreen("Longest Ride", "Distance") }
+        binding.containerLongestRide.setOnClickListener { launchEditCyclingRecordScreen("Biggest Climb", "Height") }
+        binding.containerLongestRide.setOnClickListener { launchEditCyclingRecordScreen("Best Average Speed", "Average Speed") }
     }
-    private fun launchEditCyclingRecordScreen(record: String) {
-        val intent = Intent(context, EditRunningRecordAtivity::class.java)
-        intent.putExtra("Record", record)
+    private fun launchEditCyclingRecordScreen(record: String, recordFieldHint:String) {
+        val intent = Intent(context, EditRecordActivity::class.java)
+        intent.putExtra("screen_data", EditRecordActivity.ScreenData(record, "cycling", "Time"))
         startActivity(intent)
     }
 

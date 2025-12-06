@@ -3,7 +3,7 @@ package com.example.recordkeeper.cycling
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.recordkeeper.databinding.ActivityEditCyclingRecordBinding
-
+// deleted
 class EditCyclingRecordActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditCyclingRecordBinding

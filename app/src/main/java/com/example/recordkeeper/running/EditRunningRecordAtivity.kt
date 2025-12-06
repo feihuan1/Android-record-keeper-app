@@ -8,7 +8,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import com.example.recordkeeper.databinding.ActivityEditRunningRecordAtivityBinding
-
+//deleted
 class EditRunningRecordAtivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditRunningRecordAtivityBinding
