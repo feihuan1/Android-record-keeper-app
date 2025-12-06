@@ -1,29 +1,32 @@
-package com.example.recordkeeper.running
+package com.example.recordkeeper.editrecord
 
 import android.R
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
-import com.example.recordkeeper.databinding.ActivityEditRunningRecordAtivityBinding
+import com.example.recordkeeper.databinding.ActivityEditRecordBinding
+import java.io.Serializable
 
-class EditRunningRecordAtivity : AppCompatActivity() {
+class EditRecordActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityEditRunningRecordAtivityBinding
+    private lateinit var binding: ActivityEditRecordBinding
 
-	private val runningPreferences by lazy {
-		getSharedPreferences("running", Context.MODE_PRIVATE)
+	private val screenData: ScreenData by lazy {
+		intent.getSerializableExtra("screen_data") as ScreenData
 	}
-	private  val distance by lazy{
-		intent.getStringExtra("Distance")
+
+	private val recordPreferences by lazy {
+		getSharedPreferences(screenData.sharedPreferencesName, MODE_PRIVATE)
+	}
+	private  val record by lazy{
+		intent.getStringExtra(screenData.record)
 	}
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		binding = ActivityEditRunningRecordAtivityBinding.inflate(layoutInflater)
+		binding = ActivityEditRecordBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 
 		setSupportActionBar(binding.toolbar)
@@ -55,7 +58,8 @@ class EditRunningRecordAtivity : AppCompatActivity() {
     }
 
 	private fun setupUI() {
-		supportActionBar?.title = "$distance Record"
+		supportActionBar?.title = "${screenData.record} Record"
+		binding.textInputRecord.hint = screenData.recordFieldHint
 		binding.buttonSave.setOnClickListener {
 			saveRecord()
 			finish()
@@ -67,15 +71,15 @@ class EditRunningRecordAtivity : AppCompatActivity() {
 	}
 
 	private fun clearRecord() {
-		runningPreferences.edit {
-			remove("$distance record")
-			remove("$distance date")
+		recordPreferences.edit {
+			remove("$screenData.record record")
+			remove("$screenData.record date")
 		}
 	}
 
 	private fun displayRecord() {
-		binding.editTextRecord.setText(runningPreferences.getString("$distance record", null))
-		binding.editTextDate.setText(runningPreferences.getString("$distance date", null))
+		binding.editTextRecord.setText(recordPreferences.getString("$screenData.record record", null))
+		binding.editTextDate.setText(recordPreferences.getString("$screenData.record date", null))
 
 	}
 
@@ -87,9 +91,9 @@ class EditRunningRecordAtivity : AppCompatActivity() {
 //		editor.putString("date", date)
 //		editor.apply()
 		// modern way
-		runningPreferences.edit {
-			putString("$distance record", record)
-			putString("$distance date", date)
+		recordPreferences.edit {
+			putString("${this@EditRecordActivity.screenData.record} record", record)
+			putString("${this@EditRecordActivity.screenData.record} date", date)
 		}
 	}
 
@@ -100,4 +104,10 @@ class EditRunningRecordAtivity : AppCompatActivity() {
 		}
 		return super.onOptionsItemSelected(item)
 	}
+
+	data class ScreenData (
+		val record: String,
+		val sharedPreferencesName: String,
+		val recordFieldHint: String,
+	) : Serializable
 }
