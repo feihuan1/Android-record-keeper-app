@@ -72,8 +72,8 @@ class EditRecordActivity : AppCompatActivity() {
 
 	private fun clearRecord() {
 		recordPreferences.edit {
-			remove("$screenData.record record")
-			remove("$screenData.record date")
+			remove("${screenData.record} record")
+			remove("${screenData.record} date")
 		}
 	}
 

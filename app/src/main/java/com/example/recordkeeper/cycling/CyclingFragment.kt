@@ -1,5 +1,6 @@
 package com.example.recordkeeper.cycling
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -27,6 +28,23 @@ class CyclingFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupClickListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        displayRecords()
+    }
+
+    private fun displayRecords() {
+        val cyclingPreferences = requireContext().getSharedPreferences("cycling", Context.MODE_PRIVATE)
+
+        binding.textViewLongestRideValue.text = cyclingPreferences.getString("Longest Ride record", null)
+        binding.textViewLongestRideDate.text = cyclingPreferences.getString("Longest Ride date", null)
+        binding.textViewBiggestClimbValue.text = cyclingPreferences.getString("Biggest Climb Record", null)
+        binding.textViewBiggestClimbDate.text = cyclingPreferences.getString("Biggest Climb date", null)
+        binding.textViewBestSpeedValue.text = cyclingPreferences.getString("Best Average Speed Record", null)
+        binding.textViewBestSpeedDate.text = cyclingPreferences.getString("Best Average Speed date", null)
+
     }
 
     private fun setupClickListener() {
