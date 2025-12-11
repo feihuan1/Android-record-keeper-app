@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
@@ -14,6 +15,7 @@ import com.example.recordkeeper.cycling.CyclingFragment
 import com.example.recordkeeper.databinding.ActivityMainBinding
 import com.example.recordkeeper.running.RunningFragment
 import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
 
@@ -88,8 +90,13 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                         getSharedPreferences(selection, MODE_PRIVATE).edit { clear() }
                     }
                 }
-
                 refreshCurrentFragment()
+                val snackBar = Snackbar.make(binding.frameContent, "Records cleared successfully!", Snackbar.LENGTH_LONG)
+                snackBar.anchorView = binding.bottomNav
+                snackBar.show()
+                snackBar.setAction("Undo") {
+                    // restore maybe
+                }
             }
             .setNegativeButton("No", null)
             .show()
@@ -102,7 +109,6 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             else -> {}
         }
     }
-
 
     private fun onRunningClicked(): Boolean {
         supportFragmentManager.commit {
