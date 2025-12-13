@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.recordkeeper.CYCLING
 import com.example.recordkeeper.databinding.FragmentCyclingBinding
 import com.example.recordkeeper.editrecord.EditRecordActivity
 
@@ -36,7 +35,7 @@ class CyclingFragment: Fragment() {
     }
 
     private fun displayRecords() {
-        val cyclingPreferences = requireContext().getSharedPreferences("cycling", Context.MODE_PRIVATE)
+        val cyclingPreferences = requireContext().getSharedPreferences(FILENAME, Context.MODE_PRIVATE)
 
         binding.textViewLongestRideValue.text = cyclingPreferences.getString("Longest Ride record", null)
         binding.textViewLongestRideDate.text = cyclingPreferences.getString("Longest Ride date", null)
@@ -55,8 +54,12 @@ class CyclingFragment: Fragment() {
     private fun launchEditCyclingRecordScreen(record: String, recordFieldHint:String) {
         val intent = Intent(context, EditRecordActivity::class.java)
         intent.putExtra("screen_data", EditRecordActivity.ScreenData(record,
-            CYCLING, recordFieldHint))
+            FILENAME, recordFieldHint))
         startActivity(intent)
+    }
+
+    companion object {
+        const val FILENAME = "cycling"
     }
 
 }

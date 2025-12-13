@@ -15,11 +15,6 @@ import com.example.recordkeeper.running.RunningFragment
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.snackbar.Snackbar
 
-const val RUNNING = "running"
-const val CYCLING = "cycling"
-
-const val ALL = "all"
-
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
@@ -55,17 +50,17 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val menuClickedHandled = when (item.itemId) {
             R.id.reset_running -> {
-                showConfirmationDialog(RUNNING)
+                showConfirmationDialog(RUNNING_DISPLAY_VALUE)
                 true
             }
 
             R.id.reset_cycling -> {
-                showConfirmationDialog(CYCLING)
+                showConfirmationDialog(CYCLING_DISPLAY_VALUE)
                 true
             }
 
             R.id.reset_all -> {
-                showConfirmationDialog(ALL)
+                showConfirmationDialog(ALL_DISPLAY_VALUE)
                 true
             }
 
@@ -85,24 +80,36 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                 "yes"
             ) { _, _ ->
                 when (selection) {
-                    ALL -> {
-                        getSharedPreferences(RUNNING, MODE_PRIVATE).edit { clear() }
-                        getSharedPreferences(CYCLING, MODE_PRIVATE).edit { clear() }
+                    ALL_DISPLAY_VALUE -> {
+                        getSharedPreferences(RunningFragment.FILENAME, MODE_PRIVATE).edit { clear() }
+                        getSharedPreferences(CyclingFragment.FILENAME, MODE_PRIVATE).edit { clear() }
                     }
-                    else -> {
-                        getSharedPreferences(selection, MODE_PRIVATE).edit { clear() }
+                    RUNNING_DISPLAY_VALUE -> {
+                        getSharedPreferences(RunningFragment.FILENAME, MODE_PRIVATE).edit { clear() }
                     }
+                    CYCLING_DISPLAY_VALUE -> {
+                        getSharedPreferences(CyclingFragment.FILENAME, MODE_PRIVATE).edit { clear() }
+                    }
+                    else -> {}
                 }
                 refreshCurrentFragment()
-                val snackBar = Snackbar.make(binding.frameContent, "Records cleared successfully!", Snackbar.LENGTH_LONG)
-                snackBar.anchorView = binding.bottomNav
-                snackBar.show()
-                snackBar.setAction("Undo") {
-                    // restore maybe
-                }
+                showConfirmation()
             }
             .setNegativeButton("No", null)
             .show()
+    }
+
+    private fun showConfirmation() {
+        val snackBar = Snackbar.make(
+            binding.frameContent,
+            "Records cleared successfully!",
+            Snackbar.LENGTH_LONG
+        )
+        snackBar.anchorView = binding.bottomNav
+        snackBar.show()
+        snackBar.setAction("Undo") {
+            // restore maybe
+        }
     }
 
     private fun refreshCurrentFragment() {
@@ -125,5 +132,11 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             replace(R.id.frame_content, CyclingFragment())
         }
         return true
+    }
+
+    companion object {
+        const val RUNNING_DISPLAY_VALUE = "running"
+        const val CYCLING_DISPLAY_VALUE = "cycling"
+        const val ALL_DISPLAY_VALUE = "all"
     }
 }
