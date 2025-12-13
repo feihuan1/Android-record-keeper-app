@@ -1,10 +1,8 @@
 package com.example.recordkeeper
 
-import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
@@ -16,6 +14,11 @@ import com.example.recordkeeper.databinding.ActivityMainBinding
 import com.example.recordkeeper.running.RunningFragment
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.snackbar.Snackbar
+
+const val RUNNING = "running"
+const val CYCLING = "cycling"
+
+const val ALL = "all"
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
 
@@ -52,17 +55,17 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val menuClickedHandled = when (item.itemId) {
             R.id.reset_running -> {
-                showConfirmationDialog("running")
+                showConfirmationDialog(RUNNING)
                 true
             }
 
             R.id.reset_cycling -> {
-                showConfirmationDialog("cycling")
+                showConfirmationDialog(CYCLING)
                 true
             }
 
             R.id.reset_all -> {
-                showConfirmationDialog("all")
+                showConfirmationDialog(ALL)
                 true
             }
 
@@ -82,9 +85,9 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                 "yes"
             ) { _, _ ->
                 when (selection) {
-                    "all" -> {
-                        getSharedPreferences("running", MODE_PRIVATE).edit { clear() }
-                        getSharedPreferences("cycling", MODE_PRIVATE).edit { clear() }
+                    ALL -> {
+                        getSharedPreferences(RUNNING, MODE_PRIVATE).edit { clear() }
+                        getSharedPreferences(CYCLING, MODE_PRIVATE).edit { clear() }
                     }
                     else -> {
                         getSharedPreferences(selection, MODE_PRIVATE).edit { clear() }

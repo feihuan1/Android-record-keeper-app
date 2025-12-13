@@ -9,6 +9,7 @@ import androidx.core.content.edit
 import com.example.recordkeeper.databinding.ActivityEditRecordBinding
 import java.io.Serializable
 
+const val INTENT_EXTRA_SCREEN_DATA = "screen_data"
 class EditRecordActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditRecordBinding
@@ -17,10 +18,10 @@ class EditRecordActivity : AppCompatActivity() {
 //		intent.getSerializableExtra("screen_data") as ScreenData
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getSerializableExtra("screen_data", ScreenData::class.java) as ScreenData
+            intent.getSerializableExtra(INTENT_EXTRA_SCREEN_DATA, ScreenData::class.java) as ScreenData
         } else {
 			@Suppress("DEPRECATION")
-			intent.getSerializableExtra("screen_data") as ScreenData
+			intent.getSerializableExtra(INTENT_EXTRA_SCREEN_DATA) as ScreenData
         }
     }
 
