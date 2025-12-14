@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RecordKeeper">
         <activity
+            android:launchMode="singleTop"
             android:name=".cycling.EditCyclingRecordActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"/>
